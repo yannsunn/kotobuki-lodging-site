@@ -1,51 +1,53 @@
 /**
- * Unsplash画像URLを生成するヘルパー関数
- * Unsplash Source APIを使用してカテゴリに応じた画像を取得
+ * 画像URLを生成するヘルパー関数
+ * Picsum Photos APIを使用して安定した画像を取得
  */
 
 export type ImageCategory = 'building' | 'room' | 'yokohama' | 'community' | 'support' | 'interior'
 
 /**
- * カテゴリに応じたUnsplash画像URLを取得
+ * カテゴリに応じた画像IDを取得
+ */
+function getCategoryImageIds(category: ImageCategory): number[] {
+  // カテゴリごとに適した画像IDを定義（Picsum Photos で確実に存在する 0-100 の範囲を使用）
+  const imageIds: Record<ImageCategory, number[]> = {
+    building: [1, 2, 3, 8, 10, 12, 16, 20, 24],
+    room: [30, 31, 32, 34, 36, 38, 40, 42, 44],
+    yokohama: [15, 18, 25, 26, 27, 28, 29, 33, 35],
+    community: [4, 5, 6, 7, 9, 11, 13, 14, 17],
+    support: [21, 22, 23, 37, 39, 41, 43, 45, 46],
+    interior: [47, 48, 49, 50, 51, 52, 53, 54, 55],
+  }
+  return imageIds[category]
+}
+
+/**
+ * カテゴリに応じた画像URLを取得（ランダム）
  */
 export function getUnsplashImage(category: ImageCategory, width: number = 800, height: number = 600): string {
-  // カテゴリごとの検索キーワード
-  const keywords: Record<ImageCategory, string> = {
-    building: 'apartment,building,architecture',
-    room: 'minimal,bedroom,interior',
-    yokohama: 'japan,city,urban,yokohama',
-    community: 'people,community,group',
-    support: 'helping,support,assistance',
-    interior: 'room,modern,interior,design',
-  }
+  const imageIds = getCategoryImageIds(category)
+  const randomId = imageIds[Math.floor(Math.random() * imageIds.length)]
 
-  // Unsplash Source API を使用
-  return `https://source.unsplash.com/${width}x${height}/?${keywords[category]}`
+  // Picsum Photos API を使用
+  return `https://picsum.photos/id/${randomId}/${width}/${height}`
 }
 
 /**
  * IDベースで一貫した画像を取得（同じIDなら同じ画像）
  */
 export function getConsistentImage(id: string, category: ImageCategory, width: number = 800, height: number = 600): string {
-  // カテゴリごとの検索キーワード
-  const keywords: Record<ImageCategory, string> = {
-    building: 'apartment,building,architecture',
-    room: 'minimal,bedroom,interior',
-    yokohama: 'japan,city,urban,yokohama',
-    community: 'people,community,group',
-    support: 'helping,support,assistance',
-    interior: 'room,modern,interior,design',
-  }
-
-  // IDをシードとして使用し、一貫性のある画像を取得
-  // Unsplash Source APIではsigパラメータでシードを指定できる
+  // IDをハッシュ化して画像IDを選択
   const seed = Math.abs(
     id.split('').reduce((acc, char) => {
       return char.charCodeAt(0) + ((acc << 5) - acc)
     }, 0)
   )
 
-  return `https://source.unsplash.com/${width}x${height}/?${keywords[category]}&sig=${seed}`
+  const imageIds = getCategoryImageIds(category)
+  const imageId = imageIds[seed % imageIds.length]
+
+  // Picsum Photos API を使用
+  return `https://picsum.photos/id/${imageId}/${width}/${height}`
 }
 
 /**
