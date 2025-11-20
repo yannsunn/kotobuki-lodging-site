@@ -12,6 +12,7 @@ export default function Header() {
     { name: '周辺マップ', href: '/map' },
     { name: '活動紹介', href: '/activities' },
     { name: 'お問い合わせ', href: '/contact' },
+    { name: 'オーナーログイン', href: '/login' },
   ]
 
   return (
