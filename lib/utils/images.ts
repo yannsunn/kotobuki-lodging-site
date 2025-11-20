@@ -11,7 +11,7 @@ export type ImageCategory = 'building' | 'room' | 'yokohama' | 'community' | 'su
 export function getUnsplashImage(category: ImageCategory, width: number = 800, height: number = 600): string {
   const baseUrl = 'https://images.unsplash.com/photo'
 
-  // カテゴリごとの厳選された画像ID
+  // カテゴリごとの厳選された画像ID（横浜・寿地区に適した画像）
   const imageIds: Record<ImageCategory, string[]> = {
     building: [
       '1486406112313-4e1db7f9aa1e', // モダンな建物
@@ -24,9 +24,9 @@ export function getUnsplashImage(category: ImageCategory, width: number = 800, h
       '1616594039964-ae9021a400a0', // ミニマルな部屋
     ],
     yokohama: [
-      '1542051841857-5f90071e7989', // 横浜の街並み
-      '1590559899731-3febc3f5d25f', // 日本の都市風景
-      '1555854877-bab0e564b8d5', // 横浜港
+      '1590559899731-3febc3f5d25f', // 日本の都市風景・港町
+      '1480796927426-b46e29873a5b', // 横浜の街並み
+      '1524413840807-0c3cb6fa808d', // 日本の都市夜景
     ],
     community: [
       '1529156069898-49953e39b3db', // コミュニティ

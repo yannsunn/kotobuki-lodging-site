@@ -16,31 +16,46 @@ export default async function Home() {
     .order('vacancies', { ascending: false })
     .limit(3)
 
+  // ヒーローセクション用の横浜の画像
+  const heroImage = getUnsplashImage('yokohama', 1920, 1080)
+
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              寿地区簡易宿泊所情報
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-primary-100">
-              横浜市中区寿町の宿泊情報と支援サービスをご案内します
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/vacancies"
-                className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors inline-block"
-              >
-                空室情報を見る
-              </Link>
-              <Link
-                href="/map"
-                className="bg-primary-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-400 transition-colors inline-block"
-              >
-                周辺マップ
-              </Link>
+      {/* Hero Section with Background Image */}
+      <section className="relative h-[600px] md:h-[700px] bg-gradient-to-r from-primary-600 to-primary-800">
+        <Image
+          src={heroImage}
+          alt="横浜市中区寿町"
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 to-primary-800/70"></div>
+
+        <div className="relative h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="text-center text-white">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
+                寿地区簡易宿泊所情報
+              </h1>
+              <p className="text-xl md:text-2xl mb-8 text-white/95 drop-shadow-md">
+                横浜市中区寿町の宿泊情報と支援サービスをご案内します
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/vacancies"
+                  className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors inline-block shadow-xl"
+                >
+                  空室情報を見る
+                </Link>
+                <Link
+                  href="/map"
+                  className="bg-primary-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-400 transition-colors inline-block shadow-xl border-2 border-white/20"
+                >
+                  周辺マップ
+                </Link>
+              </div>
             </div>
           </div>
         </div>
