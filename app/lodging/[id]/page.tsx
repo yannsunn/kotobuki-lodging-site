@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
+import { getConsistentImage } from '@/lib/utils/images'
 
 export default async function LodgingDetailPage({
   params,
@@ -23,6 +25,14 @@ export default async function LodgingDetailPage({
   }
 
   const isAvailable = lodging.vacancies > 0
+
+  // 画像ギャラリー用の画像を生成（建物外観+室内3枚）
+  const galleryImages = [
+    { url: getConsistentImage(lodging.id, 'building', 1200, 800), alt: '外観', category: '外観' },
+    { url: getConsistentImage(lodging.id + '-room1', 'room', 800, 600), alt: '客室1', category: '客室' },
+    { url: getConsistentImage(lodging.id + '-room2', 'interior', 800, 600), alt: '客室2', category: '客室' },
+    { url: getConsistentImage(lodging.id + '-room3', 'room', 800, 600), alt: '客室3', category: '客室' },
+  ]
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -47,23 +57,39 @@ export default async function LodgingDetailPage({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Hero Image */}
-            <div className="bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg overflow-hidden">
-              <div className="h-96 flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1}
-                  stroke="currentColor"
-                  className="w-32 h-32 text-primary-600"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
-                  />
-                </svg>
+            {/* Image Gallery */}
+            <div className="space-y-4">
+              {/* Main Image */}
+              <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
+                <Image
+                  src={galleryImages[0].url}
+                  alt={`${lodging.name} - ${galleryImages[0].alt}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  priority
+                />
+                <div className="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1 rounded text-sm">
+                  {galleryImages[0].category}
+                </div>
+              </div>
+
+              {/* Thumbnail Grid */}
+              <div className="grid grid-cols-3 gap-4">
+                {galleryImages.slice(1).map((image, index) => (
+                  <div key={index} className="relative h-32 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer">
+                    <Image
+                      src={image.url}
+                      alt={`${lodging.name} - ${image.alt}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 33vw, 20vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                      <span className="text-white text-xs px-2 py-1">{image.category}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 

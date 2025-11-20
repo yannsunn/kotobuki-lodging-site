@@ -1,4 +1,9 @@
+import Image from 'next/image'
+import { getUnsplashImage } from '@/lib/utils/images'
+
 export default function ActivitiesPage() {
+  const heroImage = getUnsplashImage('community', 1600, 600)
+
   const activities = [
     {
       title: '生活相談・支援',
@@ -72,14 +77,25 @@ export default function ActivitiesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">活動紹介</h1>
-          <p className="text-xl text-primary-100 max-w-3xl">
-            寿地区では、NPOや行政、地域の方々が協力して、様々な支援活動を行っています。
-            困ったときは、一人で抱え込まず、お気軽にご相談ください。
-          </p>
+      {/* Hero Section with Image */}
+      <div className="relative h-[400px] bg-gradient-to-r from-primary-600 to-primary-800">
+        <Image
+          src={heroImage}
+          alt="寿地区の支援活動"
+          fill
+          className="object-cover opacity-30"
+          sizes="100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-600/80 to-primary-800/80"></div>
+        <div className="relative h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">活動紹介</h1>
+            <p className="text-xl text-primary-100 max-w-3xl">
+              寿地区では、NPOや行政、地域の方々が協力して、様々な支援活動を行っています。
+              困ったときは、一人で抱え込まず、お気軽にご相談ください。
+            </p>
+          </div>
         </div>
       </div>
 

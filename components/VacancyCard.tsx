@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import Image from 'next/image'
+import { getConsistentImage } from '@/lib/utils/images'
 
 type Lodging = {
   id: string
@@ -22,24 +24,30 @@ interface VacancyCardProps {
 
 export default function VacancyCard({ lodging }: VacancyCardProps) {
   const isAvailable = lodging.vacancies > 0
+  const imageUrl = getConsistentImage(lodging.id, 'building', 800, 600)
 
   return (
     <Link href={`/lodging/${lodging.id}`}>
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full">
         {/* Image */}
-        <div className="relative h-48 bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-          <div className="text-primary-600 text-6xl">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-20 h-20">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-            </svg>
-          </div>
+        <div className="relative h-48 bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
+          <Image
+            src={imageUrl}
+            alt={lodging.name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+          {/* Overlay for better badge visibility */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+
           {/* Vacancy Badge */}
           {isAvailable ? (
-            <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+            <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
               空室 {lodging.vacancies}室
             </div>
           ) : (
-            <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+            <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
               満室
             </div>
           )}
