@@ -50,8 +50,8 @@ export function getUnsplashImage(category: ImageCategory, width: number = 800, h
   const randomIndex = Math.floor(Math.random() * categoryImages.length)
   const imageId = categoryImages[randomIndex]
 
-  // Unsplash URL構築
-  return `${baseUrl}-${imageId}?w=${width}&h=${height}&fit=crop&auto=format&q=80`
+  // Unsplash URL構築（正しい形式）
+  return `${baseUrl}-${imageId}?auto=format&fit=crop&w=${width}&q=80`
 }
 
 /**
@@ -112,7 +112,7 @@ export function getConsistentImage(id: string, category: ImageCategory, width: n
   const index = Math.abs(hashCode) % imageIds[category].length
   const imageId = imageIds[category][index]
 
-  return `${baseUrl}-${imageId}?w=${width}&h=${height}&fit=crop&auto=format&q=80`
+  return `${baseUrl}-${imageId}?auto=format&fit=crop&w=${width}&q=80`
 }
 
 /**
