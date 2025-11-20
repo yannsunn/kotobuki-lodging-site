@@ -1,6 +1,18 @@
-import { lodgings, services } from '@/lib/data'
+import { createClient } from '@/lib/supabase/server'
 
-export default function MapPage() {
+export default async function MapPage() {
+  const supabase = await createClient()
+
+  // Supabaseから宿泊所とサービスを取得
+  const { data: lodgings } = await supabase
+    .from('lodgings')
+    .select('*')
+    .eq('is_published', true)
+
+  const { data: services } = await supabase
+    .from('services')
+    .select('*')
+
   const centerLat = 35.4445
   const centerLng = 139.6388
 
@@ -69,27 +81,27 @@ export default function MapPage() {
               <div className="space-y-3">
                 <div>
                   <div className="text-sm text-gray-600">宿泊施設</div>
-                  <div className="text-2xl font-bold text-blue-600">{lodgings.length}件</div>
+                  <div className="text-2xl font-bold text-blue-600">{lodgings?.length || 0}件</div>
                 </div>
 
                 <div>
                   <div className="text-sm text-gray-600">福祉施設</div>
                   <div className="text-2xl font-bold text-green-600">
-                    {services.filter(s => s.category === 'welfare').length}件
+                    {services?.filter(s => s.category === 'welfare').length || 0}件
                   </div>
                 </div>
 
                 <div>
                   <div className="text-sm text-gray-600">医療機関</div>
                   <div className="text-2xl font-bold text-red-600">
-                    {services.filter(s => s.category === 'medical').length}件
+                    {services?.filter(s => s.category === 'medical').length || 0}件
                   </div>
                 </div>
 
                 <div>
                   <div className="text-sm text-gray-600">就労支援</div>
                   <div className="text-2xl font-bold text-yellow-600">
-                    {services.filter(s => s.category === 'employment').length}件
+                    {services?.filter(s => s.category === 'employment').length || 0}件
                   </div>
                 </div>
               </div>
@@ -132,7 +144,7 @@ export default function MapPage() {
 
                 {/* Simulated markers */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  {lodgings.slice(0, 5).map((lodging, index) => (
+                  {lodgings?.slice(0, 5).map((lodging, index) => (
                     <div
                       key={lodging.id}
                       className="absolute"
@@ -146,7 +158,7 @@ export default function MapPage() {
                       </div>
                     </div>
                   ))}
-                  {services.slice(0, 4).map((service, index) => {
+                  {services?.slice(0, 4).map((service, index) => {
                     const colors = {
                       welfare: 'bg-green-500',
                       medical: 'bg-red-500',
@@ -221,7 +233,7 @@ export default function MapPage() {
             </h2>
 
             <div className="space-y-3 max-h-96 overflow-y-auto">
-              {lodgings.map((lodging) => (
+              {lodgings?.map((lodging) => (
                 <div key={lodging.id} className="border-b border-gray-100 pb-3 last:border-0">
                   <h3 className="font-semibold text-gray-900">{lodging.name}</h3>
                   <p className="text-sm text-gray-600 mt-1">{lodging.address}</p>
@@ -253,7 +265,7 @@ export default function MapPage() {
             </h2>
 
             <div className="space-y-3 max-h-96 overflow-y-auto">
-              {services.map((service) => {
+              {services?.map((service) => {
                 const colors = {
                   welfare: 'bg-green-100 text-green-800',
                   medical: 'bg-red-100 text-red-800',

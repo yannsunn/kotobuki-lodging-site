@@ -1,9 +1,18 @@
 import Link from 'next/link'
 import VacancyCard from '@/components/VacancyCard'
-import { getAvailableLodgings } from '@/lib/data'
+import { createClient } from '@/lib/supabase/server'
 
-export default function Home() {
-  const availableLodgings = getAvailableLodgings().slice(0, 3)
+export default async function Home() {
+  const supabase = await createClient()
+
+  // Supabaseから空室のある宿泊所を取得（上位3件）
+  const { data: availableLodgings } = await supabase
+    .from('lodgings')
+    .select('*')
+    .gt('vacancies', 0)
+    .eq('is_published', true)
+    .order('vacancies', { ascending: false })
+    .limit(3)
 
   return (
     <div>
@@ -54,9 +63,15 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {availableLodgings.map((lodging) => (
-            <VacancyCard key={lodging.id} lodging={lodging} />
-          ))}
+          {availableLodgings && availableLodgings.length > 0 ? (
+            availableLodgings.map((lodging) => (
+              <VacancyCard key={lodging.id} lodging={lodging} />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12 text-gray-500">
+              現在空室情報はありません
+            </div>
+          )}
         </div>
       </section>
 

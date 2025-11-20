@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getLodgingById } from '@/lib/data'
+import { createClient } from '@/lib/supabase/server'
 
 export default async function LodgingDetailPage({
   params,
@@ -8,7 +8,15 @@ export default async function LodgingDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const lodging = getLodgingById(id)
+  const supabase = await createClient()
+
+  // Supabaseから宿泊所を取得
+  const { data: lodging } = await supabase
+    .from('lodgings')
+    .select('*')
+    .eq('id', id)
+    .eq('is_published', true)
+    .single()
 
   if (!lodging) {
     notFound()
@@ -193,7 +201,7 @@ export default async function LodgingDetailPage({
                       />
                     </svg>
                     <span className="text-2xl font-bold text-primary-600">
-                      ¥{lodging.pricePerNight.toLocaleString()}
+                      ¥{lodging.price_per_night.toLocaleString()}
                     </span>
                   </div>
                 </div>
