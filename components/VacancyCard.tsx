@@ -28,69 +28,80 @@ export default function VacancyCard({ lodging }: VacancyCardProps) {
 
   return (
     <Link href={`/lodging/${lodging.id}`}>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full opacity-100">
+      <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col h-full">
         {/* Image */}
-        <div className="relative h-48 bg-gradient-to-br from-orange-50 to-amber-100 overflow-hidden">
+        <div className="relative h-64 bg-gradient-to-br from-orange-50 to-amber-100 overflow-hidden">
           <Image
             src={imageUrl}
             alt={lodging.name}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          {/* Overlay for better badge visibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
 
           {/* Vacancy Badge */}
           {isAvailable ? (
-            <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
-              空室 {lodging.vacancies}室
+            <div className="absolute top-4 right-4 bg-white/95 backdrop-blur text-green-700 px-3 py-1.5 rounded-full text-xs font-bold shadow-md">
+              残 {lodging.vacancies} 室
             </div>
           ) : (
-            <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+            <div className="absolute top-4 right-4 bg-white/95 backdrop-blur text-red-700 px-3 py-1.5 rounded-full text-xs font-bold shadow-md">
               満室
             </div>
           )}
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-2">{lodging.name}</h3>
-
-          <div className="space-y-2 text-sm text-gray-600 mb-4">
-            <div className="flex items-start">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5">
+        <div className="p-6 flex-1 flex flex-col">
+          <div className="mb-4">
+            <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-primary-600 transition-colors">
+              {lodging.name}
+            </h3>
+            <div className="flex items-center text-slate-500 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1.5 flex-shrink-0 text-slate-400">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
               </svg>
-              <span>{lodging.address}</span>
-            </div>
-
-            <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
-              </svg>
-              <span className="font-semibold text-primary-600">¥{lodging.price_per_night.toLocaleString()}/泊</span>
+              <span className="line-clamp-1">{lodging.address}</span>
             </div>
           </div>
 
-          <p className="text-sm text-gray-600 mb-4 line-clamp-2">{lodging.description}</p>
+          <p className="text-sm text-slate-600 mb-4 line-clamp-2 leading-relaxed">{lodging.description}</p>
 
           {/* Facilities */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mb-6">
             {lodging.facilities.slice(0, 3).map((facility, index) => (
               <span
                 key={index}
-                className="inline-block bg-primary-50 text-primary-700 text-xs px-2 py-1 rounded"
+                className="inline-flex items-center text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium"
               >
                 {facility}
               </span>
             ))}
             {lodging.facilities.length > 3 && (
-              <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+              <span className="inline-flex items-center text-xs bg-slate-100 text-slate-500 px-2.5 py-1 rounded-md">
                 +{lodging.facilities.length - 3}
               </span>
             )}
+          </div>
+
+          {/* Price and Action */}
+          <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-100">
+            <div>
+              <span className="text-xs text-slate-400 block mb-0.5">1泊あたり</span>
+              <span className="text-2xl font-bold text-slate-800">
+                ¥{lodging.price_per_night.toLocaleString()}
+                <span className="text-sm font-normal text-slate-500 ml-1">~</span>
+              </span>
+            </div>
+            <div className="flex items-center text-sm font-semibold text-primary-600 group-hover:translate-x-1 transition-transform">
+              詳細を見る
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 ml-1">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
