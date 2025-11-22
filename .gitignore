@@ -40,4 +40,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# vercel
 .vercel
+
+# screenshots and temporary files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
