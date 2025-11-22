@@ -266,7 +266,7 @@ export default async function Home() {
       <section className="bg-primary-600 text-white py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">お困りのことがありますか？</h2>
-          <p className="text-xl text-primary-100 mb-10 leading-relaxed">
+          <p className="text-xl text-white/90 mb-10 leading-relaxed">
             宿泊施設の詳細や周辺サービスについて、お気軽にお問い合わせください。
           </p>
           <Link
