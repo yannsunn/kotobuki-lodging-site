@@ -45,7 +45,7 @@ export default async function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/vacancies"
-                  className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors inline-block shadow-xl"
+                  className="bg-primary-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-400 transition-colors inline-block shadow-xl border-2 border-white/20"
                 >
                   空室情報を見る
                 </Link>
