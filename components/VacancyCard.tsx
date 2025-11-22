@@ -28,7 +28,7 @@ export default function VacancyCard({ lodging }: VacancyCardProps) {
 
   return (
     <Link href={`/lodging/${lodging.id}`}>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full opacity-100">
         {/* Image */}
         <div className="relative h-48 bg-gradient-to-br from-orange-50 to-amber-100 overflow-hidden">
           <Image
