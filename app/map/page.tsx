@@ -159,13 +159,13 @@ export default async function MapPage() {
                     </div>
                   ))}
                   {services?.slice(0, 4).map((service, index) => {
-                    const colors = {
+                    const colors: Record<string, string> = {
                       welfare: 'bg-green-500',
                       medical: 'bg-red-500',
                       employment: 'bg-yellow-500',
                       other: 'bg-purple-500',
                     }
-                    const letters = {
+                    const letters: Record<string, string> = {
                       welfare: 'W',
                       medical: 'M',
                       employment: 'E',
@@ -266,13 +266,13 @@ export default async function MapPage() {
 
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {services?.map((service) => {
-                const colors = {
+                const colors: Record<string, string> = {
                   welfare: 'bg-green-100 text-green-800',
                   medical: 'bg-red-100 text-red-800',
                   employment: 'bg-yellow-100 text-yellow-800',
                   other: 'bg-purple-100 text-purple-800',
                 }
-                const labels = {
+                const labels: Record<string, string> = {
                   welfare: '福祉',
                   medical: '医療',
                   employment: '就労',
