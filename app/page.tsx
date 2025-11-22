@@ -62,12 +62,13 @@ export default async function Home() {
       </section>
 
       {/* Latest Vacancies */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">最新の空室情報</h2>
-            <p className="text-gray-600">現在空室のある宿泊所をご紹介します</p>
-          </div>
+      <section className="bg-stone-50 py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center mb-12">
+            <div>
+              <h2 className="text-3xl font-bold text-slate-800 mb-2">最新の空室情報</h2>
+              <p className="text-slate-600">現在空室のある宿泊所をご紹介します</p>
+            </div>
           <Link
             href="/vacancies"
             className="text-primary-600 hover:text-primary-700 font-semibold flex items-center"
@@ -79,26 +80,27 @@ export default async function Home() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {availableLodgings && availableLodgings.length > 0 ? (
-            availableLodgings.map((lodging) => (
-              <VacancyCard key={lodging.id} lodging={lodging} />
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12 text-gray-500">
-              現在空室情報はありません
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {availableLodgings && availableLodgings.length > 0 ? (
+              availableLodgings.map((lodging) => (
+                <VacancyCard key={lodging.id} lodging={lodging} />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12 text-slate-500">
+                現在空室情報はありません
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">寿地区について</h2>
-              <div className="prose prose-lg text-gray-600 space-y-4">
+              <h2 className="text-3xl font-bold text-slate-800 mb-6">寿地区について</h2>
+              <div className="prose prose-lg text-slate-600 space-y-4">
                 <p>
                   横浜市中区寿町は、簡易宿泊所が集まる地域として知られています。
                   かつては「ドヤ街」と呼ばれ、日雇い労働者の方々が多く暮らしていました。
@@ -137,8 +139,8 @@ export default async function Home() {
           </div>
 
           {/* Features Grid */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow">
+          <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-stone-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-primary-600">
@@ -146,13 +148,13 @@ export default async function Home() {
                   </svg>
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">宿泊施設</h3>
-                  <p className="text-gray-600">手頃な価格で利用できる簡易宿泊所をご紹介</p>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-2">宿泊施設</h3>
+                  <p className="text-slate-600">手頃な価格で利用できる簡易宿泊所をご紹介</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow">
+            <div className="bg-stone-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-primary-600">
@@ -161,13 +163,13 @@ export default async function Home() {
                   </svg>
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">周辺サービス</h3>
-                  <p className="text-gray-600">福祉、医療、就労支援などの施設情報</p>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-2">周辺サービス</h3>
+                  <p className="text-slate-600">福祉、医療、就労支援などの施設情報</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow">
+            <div className="bg-stone-50 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start">
                 <div className="flex-shrink-0">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-primary-600">
@@ -175,8 +177,8 @@ export default async function Home() {
                   </svg>
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">支援活動</h3>
-                  <p className="text-gray-600">NPOや行政による様々な支援プログラム</p>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-2">支援活動</h3>
+                  <p className="text-slate-600">NPOや行政による様々な支援プログラム</p>
                 </div>
               </div>
             </div>
@@ -185,50 +187,50 @@ export default async function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="bg-gray-100 py-16">
+      <section className="bg-stone-50 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">周辺サービス</h2>
-          <p className="text-gray-600 text-center mb-12">寿地区周辺の主な支援施設</p>
+          <h2 className="text-3xl font-bold text-slate-800 mb-2 text-center">周辺サービス</h2>
+          <p className="text-slate-600 text-center mb-16">寿地区周辺の主な支援施設</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-lg p-6 shadow-md text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-blue-600">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">福祉相談</h3>
-              <p className="text-sm text-gray-600">生活、福祉に関する各種相談窓口</p>
+              <h3 className="text-lg font-semibold text-slate-800 mb-2">福祉相談</h3>
+              <p className="text-sm text-slate-600">生活、福祉に関する各種相談窓口</p>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md text-center">
+            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-green-600">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">医療施設</h3>
-              <p className="text-sm text-gray-600">診療所、薬局などの医療機関</p>
+              <h3 className="text-lg font-semibold text-slate-800 mb-2">医療施設</h3>
+              <p className="text-sm text-slate-600">診療所、薬局などの医療機関</p>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md text-center">
+            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-yellow-600">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">就労支援</h3>
-              <p className="text-sm text-gray-600">職業訓練、求人紹介など</p>
+              <h3 className="text-lg font-semibold text-slate-800 mb-2">就労支援</h3>
+              <p className="text-sm text-slate-600">職業訓練、求人紹介など</p>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-md text-center">
+            <div className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-purple-600">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">交流施設</h3>
-              <p className="text-sm text-gray-600">地域センター、協働スペースなど</p>
+              <h3 className="text-lg font-semibold text-slate-800 mb-2">交流施設</h3>
+              <p className="text-sm text-slate-600">地域センター、協働スペースなど</p>
             </div>
           </div>
 
@@ -244,10 +246,10 @@ export default async function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-primary-600 text-white py-16">
+      <section className="bg-primary-600 text-white py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">お困りのことがありますか？</h2>
-          <p className="text-xl text-primary-100 mb-8">
+          <h2 className="text-3xl font-bold mb-6">お困りのことがありますか？</h2>
+          <p className="text-xl text-primary-100 mb-10 leading-relaxed">
             宿泊施設の詳細や周辺サービスについて、お気軽にお問い合わせください。
           </p>
           <Link
