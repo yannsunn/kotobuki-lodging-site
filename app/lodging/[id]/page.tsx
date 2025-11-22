@@ -260,7 +260,7 @@ export default async function LodgingDetailPage({
               <h2 className="text-2xl font-bold text-gray-900 mb-4">設備・サービス</h2>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {lodging.facilities.map((facility, index) => (
+                {lodging.facilities.map((facility: string, index: number) => (
                   <div key={index} className="flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
