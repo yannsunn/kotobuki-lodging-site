@@ -22,7 +22,7 @@ export default async function Home() {
   return (
     <div>
       {/* Hero Section with Background Image */}
-      <section className="relative h-[600px] md:h-[700px] bg-gradient-to-r from-primary-600 to-primary-800">
+      <section className="relative h-[85vh] min-h-[600px] bg-gradient-to-r from-primary-600 to-primary-800 flex items-center justify-center">
         <Image
           src={heroImage}
           alt="横浜市中区寿町"
@@ -31,33 +31,50 @@ export default async function Home() {
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 to-primary-800/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/70"></div>
 
-        <div className="relative h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="text-center text-white">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
-                寿地区簡易宿泊所情報
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 text-white/95 drop-shadow-md">
-                横浜市中区寿町の宿泊情報と支援サービスをご案内します
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/vacancies"
-                  className="bg-primary-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-400 transition-colors inline-block shadow-xl border-2 border-white/20"
-                >
-                  空室情報を見る
-                </Link>
-                <Link
-                  href="/map"
-                  className="bg-primary-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-400 transition-colors inline-block shadow-xl border-2 border-white/20"
-                >
-                  周辺マップ
-                </Link>
-              </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+          <div className="text-white">
+            {/* サブタイトル */}
+            <span className="inline-block py-2 px-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm mb-6 tracking-wider font-medium">
+              横浜・寿地区 簡易宿泊所ポータル
+            </span>
+
+            {/* メインタイトル */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight">
+              心休まる場所を、<br className="md:hidden" />ここから。
+            </h1>
+
+            {/* 説明文 */}
+            <p className="text-lg md:text-xl lg:text-2xl mb-10 text-white/90 max-w-3xl mx-auto leading-relaxed font-light">
+              多様な人々が行き交う街、横浜・寿町。<br className="hidden md:block" />
+              あなたのライフスタイルに合った、安心できる宿泊先をご案内します。
+            </p>
+
+            {/* アクションボタン */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link
+                href="/vacancies"
+                className="group relative px-8 py-4 bg-white text-slate-900 rounded-full font-bold text-lg hover:bg-stone-50 transition-all shadow-2xl hover:shadow-primary-500/20 w-full sm:w-auto min-w-[220px]"
+              >
+                空室を探す
+                <span className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">→</span>
+              </Link>
+              <Link
+                href="/map"
+                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-semibold hover:bg-white/10 transition-colors w-full sm:w-auto min-w-[220px] backdrop-blur-sm"
+              >
+                エリアマップを見る
+              </Link>
             </div>
           </div>
+        </div>
+
+        {/* スクロールダウンインジケーター */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-70">
+          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
         </div>
       </section>
 
